@@ -59,7 +59,7 @@ const SimpleCart = (props) => {
 };
 
 SimpleCart.propTypes = {
-  cart: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  cart: PropTypes.oneOfType([PropTypes.array]).isRequired,
   removeFromCart: PropTypes.func.isRequired,
   increaseInventory: PropTypes.func.isRequired,
 };
