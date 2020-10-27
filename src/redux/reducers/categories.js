@@ -10,7 +10,7 @@ const initialState = {
     description: "food",
   },
   ],
-  activeCategory: "electronics",
+  activeCategory: null,
 };
 
 export default (state = initialState, action) => {
