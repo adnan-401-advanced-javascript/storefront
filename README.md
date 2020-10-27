@@ -10,7 +10,7 @@ In the project directory, you can run:
 * `npm run lint`
 
 ### UML
-<img src="./assets/phase-1.png" />
+<img src="./assets/phase-2.png" />
 
 ### Phases
 
@@ -21,3 +21,5 @@ Display a list of categories from state <br/>
 When the user selects (clicks on) a category … <br/>
     Identify that category as selected (change of class/display) <br/>
     Show a list of products associated with the category <br/>
+2. `Phase2`
+We will be adding the “Add to Cart” feature to our application, which will allow our users to not only browse items in the store, but also select them and have them persist in their “shopping cart” for later purchase.
