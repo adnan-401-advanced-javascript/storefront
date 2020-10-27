@@ -9,7 +9,7 @@ import {
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
 import { makeStyles } from "@material-ui/core/styles";
-import { increaseInventoryAction, removeFromCartAction } from "../redux/actions";
+import { removeFromCartAction } from "../redux/actions";
 
 const useStyles = makeStyles(() => ({
   "@global": {
@@ -34,9 +34,8 @@ const SimpleCart = (props) => {
   const { cart } = props;
   const classes = useStyles();
 
-  const removeHandler = (name) => {
-    props.removeFromCart(name);
-    props.increaseInventory(name);
+  const removeHandler = (item) => {
+    props.removeFromCart(item);
   };
 
   return (
@@ -47,7 +46,7 @@ const SimpleCart = (props) => {
           {cart.map((item) => (
             <ListItem key={item.name}>
               <ListItemText primary={item.name} />
-              <IconButton onClick={() => removeHandler(item.name)}>
+              <IconButton onClick={() => removeHandler(item)}>
                 <HighlightOffIcon />
               </IconButton>
             </ListItem>
@@ -61,13 +60,12 @@ const SimpleCart = (props) => {
 SimpleCart.propTypes = {
   cart: PropTypes.oneOfType([PropTypes.array]).isRequired,
   removeFromCart: PropTypes.func.isRequired,
-  increaseInventory: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (store) => ({
   cart: store.cart.items,
 });
 
-const mapDispatchToProps = { removeFromCart: removeFromCartAction, increaseInventory: increaseInventoryAction };
+const mapDispatchToProps = { removeFromCart: removeFromCartAction };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleCart);

@@ -10,6 +10,7 @@ module.exports = {
     "react/jsx-filename-extension": "off",
     "react/jsx-props-no-spreading": "off",
     "react/no-deprecated": "off",
+    "no-underscore-dangle": "off",
     "func-names": ["error", "never"],
     semi: ["error", "always"],
     quotes: ["error", "double"],

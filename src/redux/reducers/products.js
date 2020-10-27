@@ -1,5 +1,8 @@
 /* eslint-disable no-param-reassign */
 const initialState = {
+  products: [], // currentProducts
+  allPrdoucts: [],
+  /*
   products: [{
     category: "electronics",
     name: "Samsung TV",
@@ -25,6 +28,9 @@ const initialState = {
     image: "https://www.news-medical.net/image.axd?picture=2018%2F2%2Fbanana.jpg",
   },
   ],
+  */
+  isLoading: false,
+  msg: "",
 };
 
 export default (state = initialState, action) => {
@@ -33,30 +39,39 @@ export default (state = initialState, action) => {
     payload,
   } = action;
   switch (type) {
-    case "CHANGEACTIVE":
+    case "CHANGE_ACTIVE":
       return {
         ...state,
-        products: initialState.products.filter((product) => product.category === payload),
+        products: state.allPrdoucts.filter((product) => product.category === payload),
       };
-    case "DECREASEINVENTORY":
+    case "SET_INVENTORY":
       return {
         ...state,
         products: state.products.map((product) => {
-          if (product.name === payload) {
-            product.inventoryCount -= 1;
+          const { name, inventoryCount } = payload;
+          if (product.name === name) {
+            product.inventoryCount = inventoryCount;
           }
           return product;
         }),
       };
-    case "INCREASEINVENTORY":
+    case "LOAD_PRODUCTS_START":
       return {
         ...state,
-        products: state.products.map((product) => {
-          if (product.name === payload) {
-            product.inventoryCount += 1;
-          }
-          return product;
-        }),
+        isLoading: true,
+        allPrdoucts: [],
+      };
+    case "LOAD_PRODUCTS_SUCCESS":
+      return {
+        ...state,
+        isLoading: false,
+        allPrdoucts: [...payload],
+      };
+    case "LOAD_PRODUCTS_FAILLED":
+      return {
+        ...state,
+        isLoading: false,
+        msg: payload,
       };
     default:
       return state;

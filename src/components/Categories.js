@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -23,31 +23,24 @@ const useStyles = (theme) => ({
   },
 });
 
-class Categories extends Component {
-  componentDidMount() {
-    const { categories, changeActiveCategory } = this.props;
-    changeActiveCategory(categories[0].name);
-  }
+const Categories = (props) => {
+  const { classes, categories, changeActiveCategory } = props;
 
-  render() {
-    const { classes, categories, changeActiveCategory } = this.props;
-
-    return (
-      <>
-        <Box>
-          <h2 className={classes.browseCategories}>Browse our Categories</h2>
-          <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
-            {categories.map((category) => (
-              <Button key={category.name} onClick={() => changeActiveCategory(category.name)}>
-                {category.displayName}
-              </Button>
-            ))}
-          </ButtonGroup>
-        </Box>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Box>
+        <h2 className={classes.browseCategories}>Browse our Categories</h2>
+        <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
+          {categories.map((category) => (
+            <Button key={category.name} onClick={() => changeActiveCategory(category.name)}>
+              {category.display_name}
+            </Button>
+          ))}
+        </ButtonGroup>
+      </Box>
+    </>
+  );
+};
 
 Categories.propTypes = {
   categories: PropTypes.oneOfType([PropTypes.array]).isRequired,

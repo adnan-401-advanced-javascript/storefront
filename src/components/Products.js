@@ -8,7 +8,7 @@ import {
   Box, CardMedia, Container, Grid, Card, CardContent, CardActions, Button, Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { addToCartAction, decreaseInventoryAction } from "../redux/actions";
+import { addToCartAction } from "../redux/actions";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -51,10 +51,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Products = ({ products, addToCart, decreaseInventory }) => {
+const Products = ({ products, addToCart }) => {
   const addToCartButton = (product) => {
     addToCart(product);
-    decreaseInventory(product.name);
   };
 
   const classes = useStyles();
@@ -88,6 +87,9 @@ const Products = ({ products, addToCart, decreaseInventory }) => {
                 <Typography variant="h6" color="textSecondary">
                   {product.description}
                 </Typography>
+                <Typography variant="h6" color="textSecondary">
+                  {`inventoryCount ${product.inventoryCount}`}
+                </Typography>
               </CardContent>
               <CardActions>
                 <Button style={{ fontSize: "0.8125rem" }} onClick={() => addToCartButton(product)}>Add to Cart</Button>
@@ -105,13 +107,12 @@ const Products = ({ products, addToCart, decreaseInventory }) => {
 Products.propTypes = {
   products: PropTypes.oneOfType([PropTypes.array]).isRequired,
   addToCart: PropTypes.func.isRequired,
-  decreaseInventory: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (store) => ({
   products: store.products.products,
 });
 
-const mapDispatchToProps = { addToCart: addToCartAction, decreaseInventory: decreaseInventoryAction };
+const mapDispatchToProps = { addToCart: addToCartAction };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
