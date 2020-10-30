@@ -25,9 +25,10 @@ class App extends Component {
   }
 
   render() {
+    const { cartCounter } = this.props;
     return (
       <>
-        <Header />
+        <Header cartCounter={cartCounter} />
         <SimpleCart />
         <Categories />
         <Products />
@@ -41,10 +42,15 @@ App.propTypes = {
   getCategories: PropTypes.func.isRequired,
   getProducts: PropTypes.func.isRequired,
   changeActiveCategory: PropTypes.func.isRequired,
+  cartCounter: PropTypes.oneOfType([PropTypes.object]).isRequired,
 };
+
+const mapStateToProps = (store) => ({
+  cartCounter: store.cart.items ? store.cart.items.length : 0,
+});
 
 const mapDispatchToProps = {
   getCategories: getCategoriesAction, getProducts: getProductsAction, changeActiveCategory: changeActiveCategoryAction,
 };
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
