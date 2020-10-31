@@ -14,7 +14,7 @@ module.exports = {
     "func-names": ["error", "never"],
     semi: ["error", "always"],
     quotes: ["error", "double"],
-    "max-len": [1, 140, 4, { ignoreComments: true, ignoreUrls: true }],
+    "max-len": [1, 180, 4, { ignoreComments: true, ignoreUrls: true }],
   },
   parserOptions: {
     ecmaVersion: 6,

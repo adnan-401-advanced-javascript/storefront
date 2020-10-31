@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
-  Grid, AppBar, CssBaseline, Toolbar, Typography,
+  Grid, AppBar, CssBaseline, Toolbar, Button,
 } from "@material-ui/core";
 
 const Header = (props) => {
@@ -13,10 +15,18 @@ const Header = (props) => {
         <AppBar position="static" elevation={0} className="MuiAppBar-root">
           <Toolbar className="">
             <Grid container justify="space-between" alignItems="center">
-              <Typography variant="h4">Store</Typography>
-              <Typography variant="h6">
+              <Button
+                to="/"
+                component={Link}
+              >
+                Store
+              </Button>
+              <Button
+                to="/checkout"
+                component={Link}
+              >
                 {`Cart ${cartCounter}`}
-              </Typography>
+              </Button>
             </Grid>
           </Toolbar>
         </AppBar>
@@ -26,7 +36,11 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  cartCounter: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  cartCounter: PropTypes.number.isRequired,
 };
 
-export default Header;
+const mapStateToProps = (store) => ({
+  cartCounter: store.cart.items ? store.cart.items.length : 0,
+});
+
+export default connect(mapStateToProps, null)(Header);

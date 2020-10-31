@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
     position: "fixed",
     top: "4.5rem",
     right: "1rem",
-    width: "200px",
+    width: "300px",
   },
 }));
 
@@ -45,7 +45,7 @@ const SimpleCart = (props) => {
         <List>
           {cart.map((item) => (
             <ListItem key={item.name}>
-              <ListItemText primary={item.name} />
+              <ListItemText primary={`${item.name} X ${item.quantity}`} />
               <IconButton onClick={() => removeHandler(item)}>
                 <HighlightOffIcon />
               </IconButton>
