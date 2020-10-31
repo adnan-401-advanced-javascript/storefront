@@ -13,6 +13,7 @@ export default () => (
     <Header />
     <Switch>
       <Route exact path="/" component={Home} />
+      <Route exact path="/storefront" component={Home} />
       <Route exact path="/products/:id" component={ProductDetails} />
       <Route exact path="/checkout" component={Checkout} />
     </Switch>
