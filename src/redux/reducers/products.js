@@ -2,6 +2,7 @@
 const initialState = {
   products: [], // currentProducts
   allPrdoucts: [],
+  currentProduct: {},
   /*
   products: [{
     category: "electronics",
@@ -47,6 +48,7 @@ export default (state = initialState, action) => {
     case "SET_INVENTORY":
       return {
         ...state,
+        currentProduct: { ...state.currentProduct, inventoryCount: payload.inventoryCount },
         products: state.products.map((product) => {
           const { name, inventoryCount } = payload;
           if (product.name === name) {
@@ -68,6 +70,24 @@ export default (state = initialState, action) => {
         allPrdoucts: [...payload],
       };
     case "LOAD_PRODUCTS_FAILLED":
+      return {
+        ...state,
+        isLoading: false,
+        msg: payload,
+      };
+    case "LOAD_ONE_PRODUCT_START":
+      return {
+        ...state,
+        isLoading: true,
+        currentProduct: {},
+      };
+    case "LOAD_ONE_PRODUCT_SUCCESS":
+      return {
+        ...state,
+        isLoading: false,
+        currentProduct: { ...payload },
+      };
+    case "LOAD_ONE_PRODUCT_FAILLED":
       return {
         ...state,
         isLoading: false,

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-
+import { Link } from "react-router-dom";
 import React from "react";
 
 import { connect } from "react-redux";
@@ -88,11 +88,12 @@ const Products = ({ products, addToCart }) => {
                   {product.description}
                 </Typography>
                 <Typography variant="h6" color="textSecondary">
-                  {`inventoryCount ${product.inventoryCount}`}
+                  {`inStock ${product.inventoryCount}`}
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button style={{ fontSize: "0.8125rem" }} onClick={() => addToCartButton(product)}>Add to Cart</Button>
+                {product.inventoryCount ? <Button style={{ fontSize: "0.8125rem" }} onClick={() => addToCartButton(product)}>Add to Cart</Button> : ""}
+                <Button size="small" component={Link} to={`/products/${product._id}`}>view details</Button>
               </CardActions>
             </Card>
 
